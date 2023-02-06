@@ -1,0 +1,62 @@
+{% extends 'bootstrap/base.html' %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+
+            <h1>All Cafes</h1>
+
+            <table class="table">
+
+                <thead>
+                <tr>
+                    <th scope="col">{{"Id:"}}</th>
+                    <th scope="col">{{"Name:"}}</th>
+                    <th scope="col">{{"Map url:"}}</th>
+                    <th scope="col">{{"Image:"}}</th>
+                    <th scope="col">{{"Location:"}}</th>
+                    <th scope="col">{{"Has sockets?:"}}</th>
+                    <th scope="col">{{"Has toilet?:"}}</th>
+                    <th scope="col">{{"Has wifi?:"}}</th>
+                    <th scope="col">{{"Can take calls?:"}}</th>
+                    <th scope="col">{{"Seats:"}}</th>
+                    <th scope="col">{{"cafe price:"}}</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for cafe in cafes %}
+                <tr>
+                    <td>{{ cafe.id }}</td>
+                    <td>{{ cafe.name }}</td>
+                    <td><a href="{{ cafe.map_url }}">Maps Link</a></td>
+                    <td><a href="{{ cafe.img_url }}"><img class="cafe-photo" src="{{ cafe.img_url }}" alt="Caffe image"></a>
+                    </td>
+                    <td>{{ cafe.location }}</td>
+                    <td>{{ cafe.has_sockets }}</td>
+                    <td>{{ cafe.has_toilet }}</td>
+                    <td>{{ cafe.has_wifi }}</td>
+                    <td>{{ cafe.can_take_calls }}</td>
+                    <td>{{ cafe.seats }}</td>
+                    <td>{{ cafe.coffee_price }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="text-center">
+                <a class="btn btn-warning  btn-lg" href="{{url_for('add_cafe')}}" role="button">Add cafe +</a>
+            </div>
+            <p><a class="mrg-button btn btn-primary btn-lg" href="{{url_for('home')}}">Return to home page</a></p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
