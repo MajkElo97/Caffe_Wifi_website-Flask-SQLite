@@ -3,7 +3,6 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, URL
-import csv
 from flask_sqlalchemy import SQLAlchemy
 from random import choice
 
@@ -51,17 +50,6 @@ class Cafe(db.Model):
     coffee_price = db.Column(db.String(250), nullable=True)
 
     def to_dict(self):
-        # Method 1.
-        # dictionary = {}
-        # # Loop through each column in the data record
-        # for column in self.__table__.columns:
-        #     # Create a new dictionary entry;
-        #     # where the key is the name of the column
-        #     # and the value is the value of the column
-        #     dictionary[column.name] = getattr(self, column.name)
-        # return dictionary
-
-        # Method 2. Alternatively use Dictionary Comprehension to do the same thing.
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
 
